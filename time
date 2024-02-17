@@ -1,0 +1,40 @@
+import turtle
+from datetime import datetime
+
+# Установка начальных параметров
+turtle.speed(1)
+turtle.bgcolor("black")
+turtle.pensize(2)
+turtle.hideturtle()
+
+def draw_hand(length):
+    turtle.pendown()
+    turtle.forward(length)
+    turtle.penup()
+    turtle.backward(length)
+
+def draw_clock_hands():
+    now = datetime.now()
+    hours = now.hour % 12
+    minutes = now.minute
+    seconds = now.second
+
+    # Рисование часовой стрелки
+    turtle.color("white")
+    turtle.setheading(90 - (hours % 12) * 30 - minutes * 0.5)
+    draw_hand(60)
+
+    # Рисование минутной стрелки
+    turtle.color("blue")
+    turtle.setheading(90 - minutes * 6 - seconds * 0.1)
+    draw_hand(90)
+
+    # Рисование секундной стрелки
+    turtle.color("red")
+    turtle.setheading(90 - seconds * 6)
+    draw_hand(100)
+
+while True:
+    turtle.clear()
+    draw_clock_hands()
+    turtle.update()
